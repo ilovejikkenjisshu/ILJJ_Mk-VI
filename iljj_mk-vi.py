@@ -4,6 +4,7 @@ import discord
 import os
 import datetime
 import my_token
+import re
 
 client = discord.Client()
 
@@ -16,7 +17,9 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    pass
+    ms = message.content
+    if re.match('.*:quit_internet:.*',ms):
+        message.delete()     
+        await message.channel.send(':dlyfmcuo:')
 
-# token にデベロッパサイトで取得したトークンを入れる
 client.run(my_token)
