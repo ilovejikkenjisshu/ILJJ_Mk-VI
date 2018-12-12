@@ -8,7 +8,6 @@ import re
 import routing
 
 client = discord.Client()
-reminder = []
 
 @client.event
 async def on_ready():
@@ -18,7 +17,7 @@ async def on_ready():
     print('------')
 
 @client.event
-async def on_message(message):
+async def on_message(message,client):
     message(message)
 
     
