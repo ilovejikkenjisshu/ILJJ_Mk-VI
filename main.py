@@ -17,7 +17,7 @@ async def on_ready():
     print('------')
 
 @client.event
-async def on_message(message,client):
+async def on_message(message):
     # 送り主がBotだった場合反応しない
     if client.user != message.author:
         #コマンド判定
