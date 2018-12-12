@@ -20,8 +20,11 @@ async def on_ready():
 async def on_message(message,client):
     # 送り主がBotだった場合反応しない
     if client.user != message.author:
+        #コマンド判定
         if message.content.startswith('!mkvi'):
-            pass
+            command = message.content
+            commandlist = command.splite()
+            message(commandlist,client,message)
 
     
 

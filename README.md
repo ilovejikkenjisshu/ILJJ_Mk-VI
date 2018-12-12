@@ -9,16 +9,17 @@ Discord-Bot
 
 ## コマンドのお作法
 
+!mkviから始めよう
 基本的にスペースで区切ろう！
 
 ```
-mkvi test
+!mkvi test
 ```
 
 オプションはハイフンで
 
 ```
-mkvi test -h
+!mkvi test -h
 ```
 
 
