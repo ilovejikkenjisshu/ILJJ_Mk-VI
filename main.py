@@ -23,8 +23,8 @@ async def on_message(message):
         #コマンド判定
         if message.content.startswith('!mkvi'):
             command = message.content
-            commandlist = command.splite()
-            message(commandlist,client,message)
+            commandlist = command.split()
+            await routing.message(commandlist,client,message)
 
     
 
