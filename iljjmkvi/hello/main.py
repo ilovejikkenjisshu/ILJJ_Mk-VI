@@ -1,7 +1,7 @@
 import discord
 
 
-class HelloModule:
+class Module:
     async def on_message(self, client, message):
         # メッセージ作成
         m = message.author.name + " : hello"

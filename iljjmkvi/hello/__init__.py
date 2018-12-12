@@ -1,1 +1,1 @@
-from .main import HelloModule as Module
+from .main import Module

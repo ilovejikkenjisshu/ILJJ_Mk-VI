@@ -1,7 +1,7 @@
 import discord
 
 
-class DeletionModule:
+class Module:
     async def on_message(self, client, message):
         from asyncio import sleep
 
