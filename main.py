@@ -18,7 +18,10 @@ async def on_ready():
 
 @client.event
 async def on_message(message,client):
-    message(message)
+    # 送り主がBotだった場合反応しない
+    if client.user != message.author:
+        if message.content.startswith('!mkvi'):
+            pass
 
     
 
