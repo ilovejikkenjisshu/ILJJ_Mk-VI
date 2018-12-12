@@ -1,10 +1,6 @@
 # -*- coding: utf-8 -*-
 
 import discord
-import os
-import datetime
-import my_token
-import re
 
 
 class ILJJ_Mk_VI(discord.Client):
