@@ -15,7 +15,7 @@ class ILJJ_Mk_VI(discord.Client):
 
         # Load commands
         cmds = settings['commands']
-        self.commands = { k: import_module(cmds[k]['module']).Module() for k in cmds }
+        self.commands = { k: import_module('iljjmkvi.' + cmds[k]['module']).Module() for k in cmds }
 
 
     async def on_ready(self):
