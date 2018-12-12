@@ -1,31 +1,47 @@
 # -*- coding: utf-8 -*-
 
 import discord
-import os
-import datetime
-import my_token
-import re
-import routing
+import pytoml
 
-client = discord.Client()
 
-@client.event
-async def on_ready():
-    print('Logged in as')
-    print(client.user.name)
-    print(client.user.id)
-    print('------')
+class ILJJ_Mk_VI(discord.Client):
+    def __init__(self, settings):
+        from importlib import import_module
 
-@client.event
-async def on_message(message):
-    # 送り主がBotだった場合反応しない
-    if client.user != message.author:
-        #コマンド判定
-        if message.content.startswith('!mkvi'):
-            command = message.content
-            commandlist = command.split()
-            await routing.message(commandlist,client,message)
+        super().__init__()
 
-    
+        # save settings
+        self.settings = settings
 
-client.run(my_token.my_token)
+        # Load commands
+        cmds = settings['commands']
+        self.commands = { k: import_module(cmds[k]['module']).Module() for k in cmds }
+
+
+    async def on_ready(self):
+        print('Logged in as')
+        print(self.user.name)
+        print(self.user.id)
+        print('------')
+
+
+    async def on_message(self, message):
+        # 送り主がBotだった場合反応しない
+        if self.user != message.author:
+            #コマンド判定
+            if message.content.startswith('!mkvi'):
+                argv = message.content.split()
+                await self.commands[argv[1]].on_message(self, message)
+
+
+def main():
+    with open('./settings.toml') as f:
+        settings = pytoml.load(f)
+
+    client = ILJJ_Mk_VI(settings)
+    client.run(settings['general']['token'])
+
+if __name__ == '__main__':
+    main()
+
+
