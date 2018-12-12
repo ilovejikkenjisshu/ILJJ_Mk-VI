@@ -17,14 +17,14 @@ async def on_ready():
     print('------')
 
 @client.event
-async def on_message(message,client):
+async def on_message(message):
     # 送り主がBotだった場合反応しない
     if client.user != message.author:
         #コマンド判定
         if message.content.startswith('!mkvi'):
             command = message.content
-            commandlist = command.splite()
-            message(commandlist,client,message)
+            commandlist = command.split()
+            await routing.message(commandlist,client,message)
 
     
 
