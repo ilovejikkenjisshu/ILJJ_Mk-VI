@@ -1,15 +1,21 @@
 # -*- coding: utf-8 -*-
 
 import discord
+import pytoml
 
 
 class ILJJ_Mk_VI(discord.Client):
     def __init__(self, settings):
-        super().__init__()
-
         from importlib import import_module
 
-        self.commands = { k: import_module(v).Module() for k, v in settings.items() }
+        super().__init__()
+
+        # save settings
+        self.settings = settings
+
+        # Load commands
+        cmds = settings['commands']
+        self.commands = { k: import_module(cmds[k]['module']).Module() for k in cmds }
 
 
     async def on_ready(self):
@@ -29,8 +35,11 @@ class ILJJ_Mk_VI(discord.Client):
 
 
 def main():
-    client = ILJJ_Mk_VI({'hello': 'hello'})
-    client.run(my_token.my_token)
+    with open('./settings.toml') as f:
+        settings = pytoml.load(f)
+
+    client = ILJJ_Mk_VI(settings)
+    client.run(settings['general']['token'])
 
 if __name__ == '__main__':
     main()
